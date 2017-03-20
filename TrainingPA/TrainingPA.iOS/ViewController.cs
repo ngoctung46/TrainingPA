@@ -4,6 +4,8 @@ using System.Reactive;
 using UIKit;
 using System.Reactive.Linq;
 using System.Collections.Generic;
+using CoreAnimation;
+using CoreGraphics;
 
 namespace TrainingPA.iOS
 {
@@ -23,28 +25,55 @@ namespace TrainingPA.iOS
             // Set border and color for LabelCode
 			base.ViewDidLoad ();
             ViewModel = new SigninViewModel();
+       
 
             // Set border and color for RoleButton
             SetBorder(RoleButton);
             SetBorder(CodeLabel);
             SetBorder(RolePickerView);
-            SetBorder(oneButton);
-            SetBorder(twoButton);
-            SetBorder(threeButton);
-            SetBorder(fourButton);
-            SetBorder(fiveButton);
-            SetBorder(sixButton);
-            SetBorder(sevenButton);
-            SetBorder(eightButton);
-            SetBorder(nineButton);
-            SetBorder(LoginButton);
-            SetBorder(clrButton);
-            SetBorder(zeroButton);
-            SetBorder(MainView);
-            MainView.Layer.CornerRadius = 5f;
+
+            SetTopBorder(oneButton);
+            SetRightBorder(oneButton);
+
+            SetTopBorder(twoButton);
+            SetRightBorder(twoButton);
+
+            SetTopBorder(threeButton);
+       
+
+            SetTopBorder(fourButton);
+            SetRightBorder(fourButton);
+
+            SetTopBorder(fiveButton);
+            SetRightBorder(fiveButton);
+
+            SetTopBorder(sixButton);
+          
+
+            SetTopBorder(sevenButton);
+            SetRightBorder(sevenButton);
+
+            SetTopBorder(eightButton);
+            SetRightBorder(eightButton);
+
+            SetTopBorder(nineButton);
+    
+
+            SetTopBorder(LoginButton);
+            SetRightBorder(LoginButton);
+
+            SetTopBorder(clrButton);
+         
+
+            SetTopBorder(zeroButton);
+            SetRightBorder(zeroButton);
+
+         
+            MainView.Layer.CornerRadius = 6;
             RolePickerView.Model = new RoleModel(RoleButton, ViewModel);
             RolePickerView.Hidden = true;
             RolePickerView.Select(1, 0, true);
+            RolePickerView.Layer.CornerRadius = 20;
             // Open pickerview when click
             RoleButton.TouchUpInside += ((sender, e) => {
                 RolePickerView.Hidden = false;
@@ -83,15 +112,50 @@ namespace TrainingPA.iOS
 		}
 
         /**
-         * Function to set the border and border color of the uiview
+         * Function to set the top border and border color of the uiview
          * @params: view => The view to be set
          */
+        private void SetTopBorder(UIView view)
+        {
+
+            //view.Layer.CornerRadius = 2;
+            //view.Layer.BorderColor = UIColor.Gray.CGColor;
+            CALayer borderLayer = new CALayer();
+            borderLayer.BackgroundColor = UIColor.LightGray.CGColor;
+            borderLayer.Frame = new CGRect(-1, 0, 101, 0.5f);
+            view.Layer.AddSublayer(borderLayer);
+        }
+
+        private void SetBottomBorder(UIView view)
+        {
+
+           
+            CALayer borderLayer = new CALayer();
+            borderLayer.BackgroundColor = UIColor.LightGray.CGColor;
+            borderLayer.Frame = new CGRect(0, 61, 100, 0.5f);
+            view.Layer.AddSublayer(borderLayer);
+        }
+
+        private void SetRightBorder(UIView view)
+        {
+
+            //view.Layer.CornerRadius = 2;
+            //view.Layer.BorderColor = UIColor.Gray.CGColor;
+            CALayer borderLayer = new CALayer();
+            borderLayer.BackgroundColor = UIColor.LightGray.CGColor;
+            borderLayer.Frame = new CGRect(101, 0, 0.5f, 61);
+            view.Layer.AddSublayer(borderLayer);
+        }
+
         private void SetBorder(UIView view)
         {
             view.Layer.BorderWidth = 0.5f;
-            view.Layer.CornerRadius = 2;
+            view.Layer.CornerRadius = 6;
             view.Layer.BorderColor = UIColor.Gray.CGColor;
         }
+
+
+
 
         /*
          * Move to welcome page
